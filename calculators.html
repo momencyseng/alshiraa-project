@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculators | Al-Shiraa Solar Energy</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;700&family=Tajawal:wght@300;400;700&display=swap"
+        rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- Header -->
+    <header>
+        <div class="container navbar">
+            <a href="index.html" class="logo">
+                <img src="logo.png" alt="Al-Shiraa Logo">
+                <span class="lang-en">Al-Shiraa Solar</span>
+                <span class="lang-ar">الشراع للطاقة</span>
+            </a>
+            <div class="hamburger">
+                <i class="fas fa-bars"></i>
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html"><span class="lang-en">Home</span><span class="lang-ar">الرئيسية</span></a></li>
+                <li><a href="index.html#about"><span class="lang-en">About Us</span><span class="lang-ar">من
+                            نحن</span></a></li>
+                <li><a href="index.html#services"><span class="lang-en">Services</span><span
+                            class="lang-ar">الخدمات</span></a></li>
+                <li><a href="calculators.html" class="active"><span class="lang-en">Calculators</span><span
+                            class="lang-ar">الحاسبات</span></a></li>
+                <li><a href="projects.html"><span class="lang-en">Gallery</span><span class="lang-ar">المعرض</span></a>
+                </li>
+                <li><a href="blog.html"><span class="lang-en">Blog</span><span class="lang-ar">المدونة</span></a></li>
+                <li><a href="index.html#contact"><span class="lang-en">Contact</span><span class="lang-ar">اتصل
+                            بنا</span></a></li>
+                <li class="nav-buttons">
+                    <button id="lang-toggle" class="language-btn">
+                        <span class="lang-en">العربية</span>
+                        <span class="lang-ar">English</span>
+                    </button>
+                    <button id="theme-toggle" class="theme-toggle-btn" title="Toggle Dark Mode">
+                        <i class="fas fa-moon"></i>
+                    </button>
+                </li>
+            </ul>
+        </div>
+    </header>
+
+    <!-- Page Header -->
+    <section class="section"
+        style="background-color: var(--primary-color); color: var(--white); text-align: center; padding: 4rem 0;">
+        <div class="container">
+            <h1 class="heading-lg" style="color: var(--white); margin-bottom: 0;">
+                <span class="lang-en">Solar & Electric Calculators</span>
+                <span class="lang-ar">حاسبات الطاقة الكهربائية والشمسية</span>
+            </h1>
+            <p>
+                <span class="lang-en">Tools to help you estimate your system needs.</span>
+                <span class="lang-ar">أدوات تساعدك في تقدير احتياجات نظامك.</span>
+            </p>
+        </div>
+    </section>
+
+    <!-- Calculators Section -->
+    <section class="section">
+        <div class="container">
+            <div class="calculators-grid"
+                style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;">
+
+                <!-- 1. Power Calculator -->
+                <div class="calculator-box">
+                    <h3 class="heading-md" style="font-size: 1.5rem;">
+                        <i class="fas fa-bolt" style="color: var(--accent-color);"></i>
+                        <span class="lang-en">Power Calculator</span>
+                        <span class="lang-ar">حاسبة القدرة (واط)</span>
+                    </h3>
+                    <div class="form-group">
+                        <label>
+                            <span class="lang-en">Voltage (V)</span><span class="lang-ar">الجهد (فولت)</span>
+                        </label>
+                        <input type="number" id="calc-volts" placeholder="220" class="calc-input">
+                    </div>
+                    <div class="form-group">
+                        <label>
+                            <span class="lang-en">Current (A)</span><span class="lang-ar">التيار (أمبير)</span>
+                        </label>
+                        <input type="number" id="calc-amps" placeholder="5" class="calc-input">
+                    </div>
+                    <button onclick="calculatePower()" class="btn" style="width: 100%;">
+                        <span class="lang-en">Calculate</span><span class="lang-ar">احسب</span>
+                    </button>
+                    <div id="result-power" class="calc-result"></div>
+                </div>
+
+                <!-- 2. Solar Panel Estimator -->
+                <div class="calculator-box">
+                    <h3 class="heading-md" style="font-size: 1.5rem;">
+                        <i class="fas fa-solar-panel" style="color: var(--accent-color);"></i>
+                        <span class="lang-en">Panel Estimator</span>
+                        <span class="lang-ar">حاسبة الألواح</span>
+                    </h3>
+                    <div class="form-group">
+                        <label>
+                            <span class="lang-en">Daily Usage (kWh)</span><span class="lang-ar">الاستهلاك اليومي (كيلو
+                                واط)</span>
+                        </label>
+                        <input type="number" id="calc-usage" placeholder="10" class="calc-input">
+                    </div>
+                    <div class="form-group">
+                        <label>
+                            <span class="lang-en">Panel Wattage (W)</span><span class="lang-ar">قدرة اللوح (واط)</span>
+                        </label>
+                        <input type="number" id="calc-panel-watt" placeholder="550" class="calc-input">
+                    </div>
+                    <button onclick="calculatePanels()" class="btn" style="width: 100%;">
+                        <span class="lang-en">Calculate</span><span class="lang-ar">احسب</span>
+                    </button>
+                    <div id="result-panels" class="calc-result"></div>
+                </div>
+
+                <!-- 3. Battery Capacity -->
+                <div class="calculator-box">
+                    <h3 class="heading-md" style="font-size: 1.5rem;">
+                        <i class="fas fa-car-battery" style="color: var(--accent-color);"></i>
+                        <span class="lang-en">Battery Capacity</span>
+                        <span class="lang-ar">سعة البطارية</span>
+                    </h3>
+                    <div class="form-group">
+                        <label>
+                            <span class="lang-en">Total Load (Watts)</span><span class="lang-ar">الحمل الكلي
+                                (واط)</span>
+                        </label>
+                        <input type="number" id="calc-load" placeholder="500" class="calc-input">
+                    </div>
+                    <div class="form-group">
+                        <label>
+                            <span class="lang-en">Backup Hours</span><span class="lang-ar">ساعات التشغيل</span>
+                        </label>
+                        <input type="number" id="calc-hours" placeholder="4" class="calc-input">
+                    </div>
+                    <div class="form-group">
+                        <label>
+                            <span class="lang-en">System Voltage (V)</span><span class="lang-ar">فولتية النظام</span>
+                        </label>
+                        <select id="calc-sys-volts" class="calc-input">
+                            <option value="12">12V</option>
+                            <option value="24">24V</option>
+                            <option value="48">48V</option>
+                        </select>
+                    </div>
+                    <button onclick="calculateBattery()" class="btn" style="width: 100%;">
+                        <span class="lang-en">Calculate</span><span class="lang-ar">احسب</span>
+                    </button>
+                    <div id="result-battery" class="calc-result"></div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact">
+        <div class="container footer-content">
+            <div class="footer-column">
+                <h4>
+                    <span class="lang-en">Al-Shiraa Solar Energy</span>
+                    <span class="lang-ar">معرض الشراع للطاقة</span>
+                </h4>
+                <p>
+                    <span class="lang-en">Clean energy for a better future.</span>
+                    <span class="lang-ar">طاقة نظيفة لمستقبل أفضل.</span>
+                </p>
+            </div>
+            <div class="footer-column">
+                <h4>
+                    <span class="lang-en">Contact Us</span>
+                    <span class="lang-ar">اتصل بنا</span>
+                </h4>
+                <ul>
+                    <li><i class="fas fa-map-marker-alt"></i> <span class="lang-en">Mosul, Opposite Al-Andalus
+                            District</span><span class="lang-ar">الموصل، حي الأندلس، مقابل الحي</span></li>
+                    <li><i class="fas fa-phone"></i> <span dir="ltr">+964 771 841 1166</span></li>
+                </ul>
+                <div class="social-links" style="margin-top: 15px;">
+                    <a href="https://www.facebook.com/share/1H4NjtAdfA/?mibextid=wwXIfr" target="_blank"
+                        style="color: white; margin-right: 15px; font-size: 1.5rem;">
+                        <i class="fab fa-facebook"></i>
+                    </a>
+                    <a href="https://instagram.com/alsheraa.iq" target="_blank"
+                        style="color: white; font-size: 1.5rem;">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="footer-column">
+                <h4>
+                    <span class="lang-en">Location</span>
+                    <span class="lang-ar">الموقع</span>
+                </h4>
+                <div style="margin-top: 10px;">
+                    <a href="https://maps.app.goo.gl/waubHG9Vxot2tj859" target="_blank"
+                        style="color: var(--accent-color); font-weight: bold;">
+                        <i class="fas fa-map-marked-alt"></i>
+                        <span class="lang-en">View on Google Maps</span>
+                        <span class="lang-ar">عرض على خرائط جوجل</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="container">
+                &copy; 2026
+                <span class="lang-en">Al-Shiraa Solar Energy. All Rights Reserved.</span>
+                <span class="lang-ar">معرض الشراع للطاقة الشمسية. جميع الحقوق محفوظة.</span>
+            </div>
+        </div>
+    </footer>
+
+    <!-- WhatsApp Button -->
+    <a href="https://wa.me/9647718411166" class="whatsapp-float" target="_blank">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
