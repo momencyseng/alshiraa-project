@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="section" style="min-height: 80vh;">
+    <div class="container" style="max-width: 600px; width: 100%;">
+        <div class="calculator-box"
+            style="padding: 2rem; background: var(--white); box-shadow: 0 4px 6px rgba(0,0,0,0.1); border-radius: 8px;">
+            <h2 class="heading-md text-center">
+                <span class="lang-en">{{ title if title else 'Add Product' }}</span>
+                <span class="lang-ar">{{ 'تعديل المنتج' if 'تعديل' in title else 'إضافة منتج' }}</span>
+            </h2>
+
+            <form method="POST" action="" enctype="multipart/form-data">
+                {{ form.hidden_tag() }}
+
+                <div class="form-group" style="margin-bottom: 1.5rem;">
+                    {{ form.name.label(class="form-control-label") }}
+                    {{ form.name(class="calc-input", placeholder="Enter product name") }}
+                    {% if form.name.errors %}
+                    {% for error in form.name.errors %}
+                    <span style="color: red; font-size: 0.8rem;">{{ error }}</span>
+                    {% endfor %}
+                    {% endif %}
+                </div>
+
+                <div class="form-group" style="margin-bottom: 1.5rem;">
+                    {{ form.description.label(class="form-control-label") }}
+                    {{ form.description(class="calc-input", style="min-height: 100px;", placeholder="Enter product
+                    description") }}
+                    {% if form.description.errors %}
+                    {% for error in form.description.errors %}
+                    <span style="color: red; font-size: 0.8rem;">{{ error }}</span>
+                    {% endfor %}
+                    {% endif %}
+                </div>
+
+                <div class="form-group" style="margin-bottom: 1.5rem;">
+                    {{ form.category.label(class="form-control-label") }}
+                    {{ form.category(class="calc-input") }}
+                    {% if form.category.errors %}
+                    {% for error in form.category.errors %}
+                    <span style="color: red; font-size: 0.8rem;">{{ error }}</span>
+                    {% endfor %}
+                    {% endif %}
+                </div>
+
+                <div class="form-group" style="margin-bottom: 1.5rem;">
+                    {{ form.image.label(class="form-control-label") }}
+                    {{ form.image(class="calc-input", style="padding: 0.5rem;") }}
+                    {% if form.image.errors %}
+                    {% for error in form.image.errors %}
+                    <span style="color: red; font-size: 0.8rem;">{{ error }}</span>
+                    {% endfor %}
+                    {% endif %}
+                </div>
+
+                <div class="form-group">
+                    {{ form.submit(class="btn", style="width: 100%;") }}
+                    <a href="{{ url_for('dashboard') }}" class="btn secondary-btn"
+                        style="width: 100%; text-align: center; margin-top: 10px; border-color: var(--primary-color); color: var(--primary-color);">Cancel</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
+{% endblock %}

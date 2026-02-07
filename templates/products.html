@@ -1,0 +1,97 @@
+{% extends "base.html" %}
+
+{% block content %}
+<!-- Header -->
+<section class="section"
+    style="background-color: var(--primary-color); color: var(--white); text-align: center; padding: 4rem 0;">
+    <div class="container">
+        <h1 class="heading-lg" style="color: var(--white); margin-bottom: 0;">
+            <span class="lang-en">Our Products</span>
+            <span class="lang-ar">منتجاتنا</span>
+        </h1>
+        <p>
+            <span class="lang-en">Explore our wide range of solar energy and security solutions.</span>
+            <span class="lang-ar">استكشف مجموعتنا الواسعة من حلول الطاقة الشمسية والأمنية.</span>
+        </p>
+    </div>
+</section>
+
+<!-- Filters (Optional, simple links for now) -->
+<section class="section" style="padding-bottom: 0;">
+    <div class="container text-center">
+        <div style="display: flex; justify-content: center; gap: 10px; flex-wrap: wrap;">
+            <a href="{{ url_for('products') }}" class="btn {{ 'secondary-btn' if category else '' }}"
+                style="{{ 'background-color: var(--accent-color); color: white;' if not category else 'color: var(--primary-color); border-color: var(--primary-color);' }}">
+                <span class="lang-en">All</span><span class="lang-ar">الكل</span>
+            </a>
+            <a href="{{ url_for('products', category='solar') }}"
+                class="btn {{ 'secondary-btn' if category != 'solar' else '' }}"
+                style="{{ 'background-color: var(--accent-color); color: white;' if category == 'solar' else 'color: var(--primary-color); border-color: var(--primary-color);' }}">
+                <span class="lang-en">Solar Energy</span><span class="lang-ar">طاقة شمسية</span>
+            </a>
+            <a href="{{ url_for('products', category='security') }}"
+                class="btn {{ 'secondary-btn' if category != 'security' else '' }}"
+                style="{{ 'background-color: var(--accent-color); color: white;' if category == 'security' else 'color: var(--primary-color); border-color: var(--primary-color);' }}">
+                <span class="lang-en">Security Cameras</span><span class="lang-ar">كاميرات مراقبة</span>
+            </a>
+            <a href="{{ url_for('products', category='inverter') }}"
+                class="btn {{ 'secondary-btn' if category != 'inverter' else '' }}"
+                style="{{ 'background-color: var(--accent-color); color: white;' if category == 'inverter' else 'color: var(--primary-color); border-color: var(--primary-color);' }}">
+                <span class="lang-en">Chargers & Inverters</span><span class="lang-ar">شواحن وعاكسات</span>
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- Products Grid -->
+<section class="section">
+    <div class="container">
+        {% if products %}
+        <div class="services-grid">
+            {% for product in products %}
+            <div class="service-card" style="text-align: left;">
+                {% if product.image_filename %}
+                <img src="{{ url_for('static', filename='uploads/' + product.image_filename) }}"
+                    alt="{{ product.name }}"
+                    style="width: 100%; height: 250px; object-fit: cover; border-radius: 4px; margin-bottom: 1rem;">
+                {% else %}
+                <div
+                    style="width: 100%; height: 250px; background: #eee; display: flex; align-items: center; justify-content: center; border-radius: 4px; margin-bottom: 1rem;">
+                    <i class="fas fa-image" style="font-size: 3rem; color: #ccc;"></i>
+                </div>
+                {% endif %}
+
+                <span class="badge"
+                    style="background: var(--accent-color); color: white; padding: 4px 8px; border-radius: 4px; font-size: 0.8rem; margin-bottom: 0.5rem; display: inline-block;">
+                    {% if product.category == 'solar' %}
+                    <span class="lang-en">Solar Energy</span><span class="lang-ar">طاقة شمسية</span>
+                    {% elif product.category == 'security' %}
+                    <span class="lang-en">Security Cameras</span><span class="lang-ar">كاميرات مراقبة</span>
+                    {% else %}
+                    <span class="lang-en">Chargers & Inverters</span><span class="lang-ar">شواحن وعاكسات</span>
+                    {% endif %}
+                </span>
+
+                <h3 style="color: var(--primary-color); margin-bottom: 0.5rem;">{{ product.name }}</h3>
+                <p style="color: #666; font-size: 0.95rem;">{{ product.description }}</p>
+
+                <div style="margin-top: 1rem;">
+                    <a href="#contact" class="btn secondary-btn"
+                        style="width: 100%; text-align: center; border-color: var(--primary-color); color: var(--primary-color);">
+                        <span class="lang-en">Inquire Now</span><span class="lang-ar">استفسر الآن</span>
+                    </a>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        {% else %}
+        <div class="text-center" style="padding: 3rem;">
+            <h3 style="color: #888;">
+                <span class="lang-en">No products found in this category.</span>
+                <span class="lang-ar">لا توجد منتجات في هذه الفئة حالياً.</span>
+            </h3>
+        </div>
+        {% endif %}
+    </div>
+</section>
+{% endblock %}

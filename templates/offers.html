@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="section"
+    style="background-color: var(--primary-color); color: var(--white); text-align: center; padding: 4rem 0;">
+    <div class="container">
+        <h1 class="heading-lg" style="color: var(--white); margin-bottom: 0;">
+            <span class="lang-en">Special Offers</span>
+            <span class="lang-ar">العروض الخاصة</span>
+        </h1>
+        <p>
+            <span class="lang-en">Exclusive deals on top-quality solar equipment.</span>
+            <span class="lang-ar">عروض حصرية على أفضل معدات الطاقة الشمسية.</span>
+        </p>
+    </div>
+</section>
+
+<section class="section">
+    <div class="container">
+        {% if products %}
+        <div class="services-grid">
+            {% for product in products %}
+            <div class="service-card" style="text-align: left; border: 2px solid var(--accent-color);">
+                <div
+                    style="position: absolute; top: 10px; right: 10px; background: red; color: white; padding: 5px 10px; border-radius: 4px; font-weight: bold; z-index: 1;">
+                    SALE
+                </div>
+
+                {% if product.image_filename %}
+                <img src="{{ url_for('static', filename='uploads/' + product.image_filename) }}"
+                    alt="{{ product.name }}"
+                    style="width: 100%; height: 250px; object-fit: cover; border-radius: 4px; margin-bottom: 1rem;">
+                {% else %}
+                <div
+                    style="width: 100%; height: 250px; background: #eee; display: flex; align-items: center; justify-content: center; border-radius: 4px; margin-bottom: 1rem;">
+                    <i class="fas fa-image" style="font-size: 3rem; color: #ccc;"></i>
+                </div>
+                {% endif %}
+
+                <h3 style="color: var(--primary-color); margin-bottom: 0.5rem;">{{ product.name }}</h3>
+                <p style="color: #666; font-size: 0.95rem;">{{ product.description }}</p>
+
+                <div style="margin-top: 1rem; display: flex; justify-content: space-between; align-items: center;">
+                    <span style="font-size: 1.25rem; font-weight: bold; color: var(--accent-color);">{{ product.price }}
+                        IQD</span>
+                    {% if product.stock > 0 %}
+                    <a href="{{ url_for('add_to_cart', product_id=product.id) }}" class="btn"
+                        style="padding: 0.5rem 1rem;">
+                        <i class="fas fa-cart-plus"></i> <span class="lang-en">Add to Cart</span><span
+                            class="lang-ar">أضف للسلة</span>
+                    </a>
+                    {% else %}
+                    <button class="btn secondary-btn" disabled
+                        style="padding: 0.5rem 1rem; cursor: not-allowed; opacity: 0.6;">
+                        <span class="lang-en">Out of Stock</span><span class="lang-ar">نفدت الكمية</span>
+                    </button>
+                    {% endif %}
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        {% else %}
+        <div class="text-center" style="padding: 3rem;">
+            <h3 style="color: #888;">
+                <span class="lang-en">No special offers at the moment. Check back soon!</span>
+                <span class="lang-ar">لا توجد عروض خاصة حالياً. تحقق مرة أخرى قريباً!</span>
+            </h3>
+        </div>
+        {% endif %}
+    </div>
+</section>
+{% endblock %}

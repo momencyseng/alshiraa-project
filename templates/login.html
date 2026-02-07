@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="section" style="min-height: 60vh; display: flex; align-items: center; justify-content: center;">
+    <div class="container" style="max-width: 400px; width: 100%;">
+        <div class="calculator-box"
+            style="padding: 2rem; background: var(--white); box-shadow: 0 4px 6px rgba(0,0,0,0.1); border-radius: 8px;">
+            <h2 class="heading-md text-center">
+                <span class="lang-en">Login</span>
+                <span class="lang-ar">تسجيل الدخول</span>
+            </h2>
+
+            <div class="text-center" style="margin-bottom: 2rem;">
+                <a href="{{ url_for('google_login') }}" class="btn"
+                    style="background-color: #db4437; color: white; width: 100%; display: inline-flex; justify-content: center; align-items: center; gap: 10px;">
+                    <i class="fab fa-google"></i> <span class="lang-en">Sign in with Google</span><span
+                        class="lang-ar">الدخول بواسطة Google</span>
+                </a>
+            </div>
+
+            <div style="text-align: center; margin-bottom: 1rem; color: #888;">
+                <span>OR / أو</span>
+            </div>
+
+            <form method="POST" action="">
+                {{ form.hidden_tag() }}
+
+                <div class="form-group" style="margin-bottom: 1.5rem;">
+                    {{ form.username.label(class="form-control-label") }}
+                    {{ form.username(class="calc-input", placeholder="Username") }}
+                    {% if form.username.errors %}
+                    {% for error in form.username.errors %}
+                    <span style="color: red; font-size: 0.8rem;">{{ error }}</span>
+                    {% endfor %}
+                    {% endif %}
+                </div>
+
+                <div class="form-group" style="margin-bottom: 1.5rem;">
+                    {{ form.password.label(class="form-control-label") }}
+                    {{ form.password(class="calc-input", placeholder="Password") }}
+                    {% if form.password.errors %}
+                    {% for error in form.password.errors %}
+                    <span style="color: red; font-size: 0.8rem;">{{ error }}</span>
+                    {% endfor %}
+                    {% endif %}
+                </div>
+
+                <div class="form-group">
+                    {{ form.submit(class="btn", style="width: 100%;") }}
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
+{% endblock %}

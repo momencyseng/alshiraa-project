@@ -1,0 +1,79 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="section" style="min-height: 60vh;">
+    <div class="container">
+        <h1 class="heading-md text-center">
+            <span class="lang-en">Checkout</span>
+            <span class="lang-ar">إتمام الشراء</span>
+        </h1>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 2rem;">
+            <!-- Order Summary -->
+            <div style="background: white; padding: 2rem; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+                <h3><span class="lang-en">Order Summary</span><span class="lang-ar">ملخص الطلب</span></h3>
+                <ul style="list-style: none; padding: 0; margin-top: 1rem;">
+                    {% for item in cart_items %}
+                    <li
+                        style="display: flex; justify-content: space-between; border-bottom: 1px solid #eee; padding: 0.5rem 0;">
+                        <span>{{ item.product.name }} (x{{ item.quantity }})</span>
+                        <span>{{ item.quantity * item.product.price }} IQD</span>
+                    </li>
+                    {% endfor %}
+                </ul>
+                <div style="margin-top: 1rem; padding-top: 1rem; border-top: 2px solid #eee;">
+                    <div style="display: flex; justify-content: space-between;">
+                        <span><span class="lang-en">Subtotal</span><span class="lang-ar">المجموع الفرعي</span></span>
+                        <span>{{ subtotal }} IQD</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; margin-top: 0.5rem;">
+                        <span><span class="lang-en">Delivery</span><span class="lang-ar">التوصيل</span></span>
+                        <span>{{ delivery }} IQD</span>
+                    </div>
+                    <div
+                        style="display: flex; justify-content: space-between; margin-top: 1rem; font-weight: bold; font-size: 1.2rem;">
+                        <span><span class="lang-en">Total</span><span class="lang-ar">الإجمالي</span></span>
+                        <span style="color: var(--primary-color);">{{ total }} IQD</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Delivery Details Form -->
+            <div style="background: white; padding: 2rem; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+                <h3><span class="lang-en">Delivery Details</span><span class="lang-ar">تفاصيل التوصيل</span></h3>
+                <form method="POST" action="" style="margin-top: 1rem;">
+                    <div class="form-group" style="margin-bottom: 1rem;">
+                        <label class="form-control-label">
+                            <span class="lang-en">Phone Number</span><span class="lang-ar">رقم الهاتف</span>
+                        </label>
+                        <input type="text" name="phone" class="calc-input" required placeholder="0770xxxxxxx">
+                    </div>
+                    <div class="form-group" style="margin-bottom: 1rem;">
+                        <label class="form-control-label">
+                            <span class="lang-en">Address</span><span class="lang-ar">العنوان</span>
+                        </label>
+                        <textarea name="address" class="calc-input" required placeholder="City, District, Street..."
+                            style="min-height: 80px;"></textarea>
+                    </div>
+                    <div class="form-group" style="margin-bottom: 2rem;">
+                        <label class="form-control-label">
+                            <span class="lang-en">Delivery Date (Min 2 days)</span><span class="lang-ar">تاريخ التوصيل
+                                (بعد يومين على الأقل)</span>
+                        </label>
+                        <input type="date" name="delivery_date" class="calc-input" required
+                            min="{{ (today + timedelta(days=2)).strftime('%Y-%m-%d') }}">
+                    </div>
+
+                    <button type="submit" class="btn" style="width: 100%;">
+                        <span class="lang-en">Confirm Order</span><span class="lang-ar">تأكيد الطلب</span>
+                    </button>
+                    <a href="{{ url_for('cart') }}" class="btn secondary-btn"
+                        style="display: block; text-align: center; margin-top: 1rem; border-color: #666; color: #666;">
+                        <span class="lang-en">Back to Cart</span><span class="lang-ar">عودة للسلة</span>
+                    </a>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

@@ -1,0 +1,268 @@
+{% extends "base.html" %}
+
+{% block content %}
+<!-- Hero Section -->
+<section class="hero">
+    <div class="container hero-content">
+        <h1 data-aos="fade-up">
+            <span class="lang-en">Clean Energy for a <span style="color: var(--accent-color);">Better
+                    Future</span></span>
+            <span class="lang-ar">طاقة نظيفة <span style="color: var(--accent-color);">لمستقبل أفضل</span></span>
+        </h1>
+        <p data-aos="fade-up" data-aos-delay="200">
+            <span class="lang-en">Expert Solar Solutions & Security Systems in Nineveh, Iraq. 15+ Years of
+                Excellence.</span>
+            <span class="lang-ar">حلول الطاقة الشمسية وأنظمة الأمان في نينوى، العراق. أكثر من 15 عاماً من الخبرة
+                والتميز.</span>
+        </p>
+        <div class="cta-buttons" data-aos="fade-up" data-aos-delay="400">
+            <a href="#contact" class="btn">
+                <span class="lang-en">Get a Quote</span>
+                <span class="lang-ar">اطلب عرض سعر</span>
+            </a>
+            <a href="{{ url_for('projects') }}" class="btn secondary-btn">
+                <span class="lang-en">View Projects</span>
+                <span class="lang-ar">عرض المشاريع</span>
+            </a>
+            <a href="{{ url_for('calculators') }}" class="btn secondary-btn"
+                style="border-color: var(--accent-color); color: var(--accent-color);">
+                <i class="fas fa-calculator" style="margin-right: 5px;"></i>
+                <span class="lang-en">Calculators</span>
+                <span class="lang-ar">الحاسبات</span>
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- About Us Section -->
+<section id="about" class="section about">
+    <div class="container about-content">
+        <div class="about-img">
+            <!-- Real Team/Office Image -->
+            <img src="{{ url_for('static', filename='about.jpg') }}"
+                style="border-radius: 8px; box-shadow: 0 10px 20px rgba(0,0,0,0.1);" alt="Al-Shiraa Exhibition">
+        </div>
+        <div class="about-text">
+            <h2 class="heading-lg">
+                <span class="lang-en">About Al-Shiraa</span>
+                <span class="lang-ar">عن معرض الشراع</span>
+            </h2>
+            <div class="lang-en">
+                <p>Founded in 1986, Al-Shiraa Solar Energy (معرض الشراع للطاقة الشمسية) builds on over 15 years of
+                    deep industry experience. We are dedicated to providing sustainable energy solutions to
+                    homeowners, farmers, and businesses in Nineveh Governorate.</p>
+            </div>
+            <div class="lang-ar">
+                <p>تأسس معرض الشراع للطاقة الشمسية في عام 1986، مرتكزاً على خبرة عميقة تمتد لأكثر من 15 عاماً في هذا
+                    المجال. نحن ملتزمون بتقديم حلول طاقة مستدامة للمنازل، المزارعين، والشركات في محافظة نينوى.</p>
+            </div>
+
+            <div class="about-highlights">
+                <div class="highlight-item">
+                    <strong>
+                        <span class="lang-en">Since 1986</span>
+                        <span class="lang-ar">منذ 1986</span>
+                    </strong>
+                    <p>
+                        <span class="lang-en">Established</span>
+                        <span class="lang-ar">تأسست</span>
+                    </p>
+                </div>
+                <div class="highlight-item">
+                    <strong>
+                        <span class="lang-en">Turnkey</span>
+                        <span class="lang-ar">شامل</span>
+                    </strong>
+                    <p>
+                        <span class="lang-en">Solutions</span>
+                        <span class="lang-ar">حلول متكاملة</span>
+                    </p>
+                </div>
+                <div class="highlight-item">
+                    <strong>
+                        <span class="lang-en">Trusted</span>
+                        <span class="lang-ar">موثوق</span>
+                    </strong>
+                    <p>
+                        <span class="lang-en">Warranty</span>
+                        <span class="lang-ar">ضمان حقيقي</span>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Brands Section -->
+<section class="section brands">
+    <div class="container">
+        <h3 class="heading-md text-center">
+            <span class="lang-en">Our Trusted Brands</span>
+            <span class="lang-ar">شركاؤنا والعلامات التجارية</span>
+        </h3>
+        <div class="brands-grid">
+            <span class="brand-item">Jinko Solar</span>
+            <span class="brand-item">Longi</span>
+            <span class="brand-item">Trina Solar</span>
+            <span class="brand-item">Growatt</span>
+            <span class="brand-item">Huawei</span>
+            <span class="brand-item">Voltronic</span>
+            <span class="brand-item">Hikvision</span>
+        </div>
+    </div>
+</section>
+
+<!-- Services & Products Section -->
+<section id="services" class="section">
+    <div class="container">
+        <h2 class="heading-lg text-center">
+            <span class="lang-en">Our Services & Products</span>
+            <span class="lang-ar">خدماتنا ومنتجاتنا</span>
+        </h2>
+        <div class="services-grid">
+            <!-- Service 1 -->
+            <div class="service-card">
+                <i class="fas fa-sun service-icon"></i>
+                <h3>
+                    <span class="lang-en">Solar Systems</span>
+                    <span class="lang-ar">أنظمة الطاقة الشمسية</span>
+                </h3>
+                <p>
+                    <span class="lang-en">On-Grid, Off-Grid, and Hybrid systems tailored to your energy needs.
+                        Reduce your electricity bills today.</span>
+                    <span class="lang-ar">أنظمة متصلة بالشبكة، منفصلة، وهجينة مصممة خصيصاً لاحتياجاتك. قلل فواتير
+                        الكهرباء اليوم.</span>
+                </p>
+            </div>
+            <!-- Service 2 -->
+            <div class="service-card">
+                <i class="fas fa-water service-icon"></i>
+                <h3>
+                    <span class="lang-en">Solar Irrigation</span>
+                    <span class="lang-ar">الري بالطاقة الشمسية</span>
+                </h3>
+                <p>
+                    <span class="lang-en">Reliable pumping solutions for farmers. High-efficiency systems for
+                        agricultural needs.</span>
+                    <span class="lang-ar">حلول ضخ موثوقة للمزارعين. أنظمة عالية الكفاءة لتلبية الاحتياجات
+                        الزراعية.</span>
+                </p>
+            </div>
+            <!-- Service 3 -->
+            <div class="service-card">
+                <i class="fas fa-video service-icon"></i>
+                <h3>
+                    <span class="lang-en">Security Systems</span>
+                    <span class="lang-ar">أنظمة المراقبة</span>
+                </h3>
+                <p>
+                    <span class="lang-en">Top-tier CCTV surveillance cameras from Hikvision to keep your property
+                        safe and secure.</span>
+                    <span class="lang-ar">كاميرات مراقبة عالية الجودة من Hikvision للحفاظ على أمان ممتلكاتك.</span>
+                </p>
+            </div>
+            <!-- Service 4 -->
+            <div class="service-card">
+                <i class="fas fa-tools service-icon"></i>
+                <h3>
+                    <span class="lang-en">Maintenance & Support</span>
+                    <span class="lang-ar">الصيانة والدعم</span>
+                </h3>
+                <p>
+                    <span class="lang-en">Comprehensive after-sales service and maintenance to ensure your systems
+                        run at peak performance.</span>
+                    <span class="lang-ar">خدمة ما بعد البيع وصيانة شاملة لضمان عمل أنظمتك بأقصى كفاءة.</span>
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Projects Teaser -->
+<section class="section projects-teaser">
+    <div class="container">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
+            <h2 class="heading-md" style="margin-bottom: 0;">
+                <span class="lang-en">Recent Projects</span>
+                <span class="lang-ar">أحدث المشاريع</span>
+            </h2>
+            <a href="{{ url_for('projects') }}" class="btn secondary-btn" style="border-color: white; color: white;">
+                <span class="lang-en">View All Gallery</span>
+                <span class="lang-ar">عرض كل المعرض</span>
+            </a>
+        </div>
+        <div class="project-gallery-grid">
+            <!-- Real Project Images -->
+            <div class="project-item">
+                <img src="{{ url_for('static', filename='project_1.jpg') }}" alt="Residential Solar">
+                <div class="project-overlay">
+                    <span class="lang-en">Residential Installation</span>
+                    <span class="lang-ar">تنصيب منزلي</span>
+                </div>
+            </div>
+            <div class="project-item">
+                <img src="{{ url_for('static', filename='project_2.jpg') }}" alt="Agricultural Solar">
+                <div class="project-overlay">
+                    <span class="lang-en">Industrial Facility</span>
+                    <span class="lang-ar">منشأة صناعية</span>
+                </div>
+            </div>
+            <div class="project-item">
+                <img src="{{ url_for('static', filename='project_3.jpg') }}" alt="Commercial Solar">
+                <div class="project-overlay">
+                    <span class="lang-en">Commercial System</span>
+                    <span class="lang-ar">نظام تجاري</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Why Us Section -->
+<section class="section why-us">
+    <div class="container">
+        <h2 class="heading-lg text-center">
+            <span class="lang-en">Why Choose Us?</span>
+            <span class="lang-ar">لماذا تختارنا؟</span>
+        </h2>
+        <div class="features-grid">
+            <div class="feature-box">
+                <i class="fas fa-tag feature-icon"></i>
+                <h3>
+                    <span class="lang-en">Competitive Pricing</span>
+                    <span class="lang-ar">أسعار تنافسية</span>
+                </h3>
+                <p>
+                    <span class="lang-en">Tailored solutions that fit your budget without compromising on
+                        quality.</span>
+                    <span class="lang-ar">حلول مصممة لتناسب ميزانيتك دون المساس بالجودة.</span>
+                </p>
+            </div>
+            <div class="feature-box">
+                <i class="fas fa-shield-alt feature-icon"></i>
+                <h3>
+                    <span class="lang-en">Real Warranty</span>
+                    <span class="lang-ar">ضمان حقيقي</span>
+                </h3>
+                <p>
+                    <span class="lang-en">We stand by our products with genuine warranties and excellent after-sales
+                        support.</span>
+                    <span class="lang-ar">نحن نضمن منتجاتنا بضمانات حقيقية ودعم ممتاز ما بعد البيع.</span>
+                </p>
+            </div>
+            <div class="feature-box">
+                <i class="fas fa-check-circle feature-icon"></i>
+                <h3>
+                    <span class="lang-en">Original Products</span>
+                    <span class="lang-ar">منتجات أصلية</span>
+                </h3>
+                <p>
+                    <span class="lang-en">We use only authentic, high-quality components from world-renowned
+                        brands.</span>
+                    <span class="lang-ar">نستخدم فقط مكونات أصلية وعالية الجودة من ماركات عالمية معروفة.</span>
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

@@ -1,0 +1,80 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="section" style="min-height: 60vh;">
+    <div class="container">
+        <h1 class="heading-lg text-center">
+            <span class="lang-en">Shopping Cart</span>
+            <span class="lang-ar">سلة التسوق</span>
+        </h1>
+
+        {% if session.get('cart') %}
+        <div style="background: white; padding: 2rem; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+            <table style="width: 100%; border-collapse: collapse; margin-bottom: 2rem;">
+                <thead>
+                    <tr style="border-bottom: 2px solid #eee;">
+                        <th style="text-align: left; padding: 1rem;"><span class="lang-en">Product</span><span
+                                class="lang-ar">المنتج</span></th>
+                        <th style="text-align: center; padding: 1rem;"><span class="lang-en">Price</span><span
+                                class="lang-ar">السعر</span></th>
+                        <th style="text-align: center; padding: 1rem;"><span class="lang-en">Quantity</span><span
+                                class="lang-ar">الكمية</span></th>
+                        <th style="text-align: center; padding: 1rem;"><span class="lang-en">Total</span><span
+                                class="lang-ar">المجموع</span></th>
+                        <th style="text-align: center; padding: 1rem;"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in cart_items %}
+                    <tr style="border-bottom: 1px solid #eee;">
+                        <td style="padding: 1rem;">{{ item.product.name }}</td>
+                        <td style="text-align: center; padding: 1rem;">{{ item.product.price }} IQD</td>
+                        <td style="text-align: center; padding: 1rem;">{{ item.quantity }}</td>
+                        <td style="text-align: center; padding: 1rem;">{{ item.product.price * item.quantity }} IQD</td>
+                        <td style="text-align: center; padding: 1rem;">
+                            <a href="{{ url_for('remove_from_cart', product_id=item.product.id) }}" style="color: red;">
+                                <i class="fas fa-trash"></i>
+                            </a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+
+            <div style="text-align: right; margin-bottom: 2rem;">
+                <h3>
+                    <span class="lang-en">Subtotal:</span><span class="lang-ar">المجموع الفرعي:</span>
+                    {{ subtotal }} IQD
+                </h3>
+                <p style="color: #666;">
+                    <span class="lang-en">Shipping (+5,000 IQD) calculated at checkout.</span>
+                    <span class="lang-ar">يتم إضافة الشحن (5,000 دينار) عند الدفع.</span>
+                </p>
+            </div>
+
+            <div style="text-align: right;">
+                <a href="{{ url_for('products') }}" class="btn secondary-btn" style="margin-right: 1rem;">
+                    <span class="lang-en">Continue Shopping</span><span class="lang-ar">متابعة التسوق</span>
+                </a>
+                <a href="{{ url_for('checkout') }}" class="btn">
+                    <span class="lang-en">Proceed to Checkout</span><span class="lang-ar">إتمام الشراء</span>
+                </a>
+            </div>
+        </div>
+        {% else %}
+        <div class="text-center" style="padding: 4rem;">
+            <i class="fas fa-shopping-cart" style="font-size: 4rem; color: #ddd; margin-bottom: 1rem;"></i>
+            <h3>
+                <span class="lang-en">Your cart is empty.</span>
+                <span class="lang-ar">سلة التسوق فارغة.</span>
+            </h3>
+            <div style="margin-top: 2rem;">
+                <a href="{{ url_for('products') }}" class="btn">
+                    <span class="lang-en">Browse Products</span><span class="lang-ar">تصفح المنتجات</span>
+                </a>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+</section>
+{% endblock %}

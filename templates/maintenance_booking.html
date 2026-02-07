@@ -1,0 +1,114 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="section" style="min-height: 80vh;">
+    <div class="container">
+        <h1 class="heading-lg text-center">
+            <span class="lang-en">Request Maintenance</span>
+            <span class="lang-ar">طلب صيانة</span>
+        </h1>
+        <p class="text-center" style="margin-bottom: 2rem;">
+            <span class="lang-en">Fill out the form below to schedule a maintenance visit. Ensure GPS access for
+                accurate location.</span>
+            <span class="lang-ar">يرجى ملء النموذج أدناه لتحديد موعد زيارة صيانة. تأكد من تفعيل الموقع الجغرافي لتحديد
+                مكانك بدقة.</span>
+        </p>
+
+        <div
+            style="max-width: 600px; margin: 0 auto; background: white; padding: 2rem; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+            <form method="POST" action="" id="maintenanceForm">
+                <div class="form-group" style="margin-bottom: 1.5rem;">
+                    <label class="form-control-label">
+                        <span class="lang-en">Your Name</span><span class="lang-ar">اسمك الكريم</span>
+                    </label>
+                    <input type="text" name="customer_name" class="calc-input" required placeholder="John Doe">
+                </div>
+
+                <div class="form-group" style="margin-bottom: 1.5rem;">
+                    <label class="form-control-label">
+                        <span class="lang-en">Phone Number</span><span class="lang-ar">رقم الهاتف</span>
+                    </label>
+                    <input type="tel" name="phone_number" class="calc-input" required placeholder="0770xxxxxxx">
+                </div>
+
+                <div class="form-group" style="margin-bottom: 1.5rem;">
+                    <label class="form-control-label">
+                        <span class="lang-en">Service Type</span><span class="lang-ar">نوع الخدمة</span>
+                    </label>
+                    <select name="service_type" class="calc-input" required>
+                        <option value="Solar Cleaning">تنظيف الألواح - Cleaning</option>
+                        <option value="Inverter Check">فحص العاكس - Inverter Check</option>
+                        <option value="Battery Replacement">تبديل بطاريات - Battery Replacement</option>
+                        <option value="System Malfunction">عطل في النظام - System Malfunction</option>
+                        <option value="New Installation Consult">استشارة تركيب جديد - New Installation Consult</option>
+                    </select>
+                </div>
+
+                <div class="form-group" style="margin-bottom: 2rem;">
+                    <label class="form-control-label">
+                        <span class="lang-en">Location</span><span class="lang-ar">الموقع</span>
+                    </label>
+                    <div style="display: flex; gap: 10px;">
+                        <input type="text" id="locationStatus" class="calc-input" readonly
+                            placeholder="Waiting for GPS..." style="background: #eee;">
+                        <button type="button" class="btn" style="background: var(--accent-color);"
+                            onclick="getLocation()">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </button>
+                    </div>
+                    <input type="hidden" name="latitude" id="latitude">
+                    <input type="hidden" name="longitude" id="longitude">
+                    <p style="font-size: 0.8rem; color: #666; margin-top: 5px;">
+                        <span class="lang-en">Click the map icon to capture your current location.</span>
+                        <span class="lang-ar">اضغط على أيقونة الخريطة لتسجيل موقعك الحالي.</span>
+                    </p>
+                </div>
+
+                <button type="submit" class="btn" style="width: 100%;">
+                    <span class="lang-en">Submit Request</span><span class="lang-ar">إرسال الطلب</span>
+                </button>
+            </form>
+        </div>
+    </div>
+</section>
+
+<script>
+    function getLocation() {
+        const status = document.getElementById('locationStatus');
+        if (navigator.geolocation) {
+            status.value = "Locating...";
+            navigator.geolocation.getCurrentPosition(showPosition, showError);
+        } else {
+            status.value = "Geolocation is not supported by this browser.";
+        }
+    }
+
+    function showPosition(position) {
+        document.getElementById('latitude').value = position.coords.latitude;
+        document.getElementById('longitude').value = position.coords.longitude;
+        document.getElementById('locationStatus').value = "Location Captured (" + position.coords.latitude.toFixed(4) + ", " + position.coords.longitude.toFixed(4) + ")";
+        document.getElementById('locationStatus').style.background = "#d4edda"; // Greenish success
+    }
+
+    function showError(error) {
+        let msg = "";
+        switch (error.code) {
+            case error.PERMISSION_DENIED:
+                msg = "User denied the request for Geolocation."
+                break;
+            case error.POSITION_UNAVAILABLE:
+                msg = "Location information is unavailable."
+                break;
+            case error.TIMEOUT:
+                msg = "The request to get user location timed out."
+                break;
+            case error.UNKNOWN_ERROR:
+                msg = "An unknown error occurred."
+                break;
+        }
+        document.getElementById('locationStatus').value = "Error: " + msg;
+    }
+
+    // Auto-request on load if desired, but button is better UX
+</script>
+{% endblock %}

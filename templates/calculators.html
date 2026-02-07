@@ -1,0 +1,115 @@
+{% extends "base.html" %}
+
+{% block content %}
+<!-- Page Header -->
+<section class="section"
+    style="background-color: var(--primary-color); color: var(--white); text-align: center; padding: 4rem 0;">
+    <div class="container">
+        <h1 class="heading-lg" style="color: var(--white); margin-bottom: 0;">
+            <span class="lang-en">Solar & Electric Calculators</span>
+            <span class="lang-ar">حاسبات الطاقة الكهربائية والشمسية</span>
+        </h1>
+        <p>
+            <span class="lang-en">Tools to help you estimate your system needs.</span>
+            <span class="lang-ar">أدوات تساعدك في تقدير احتياجات نظامك.</span>
+        </p>
+    </div>
+</section>
+
+<!-- Calculators Section -->
+<section class="section">
+    <div class="container">
+        <div class="calculators-grid"
+            style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;">
+
+            <!-- 1. Power Calculator -->
+            <div class="calculator-box">
+                <h3 class="heading-md" style="font-size: 1.5rem;">
+                    <i class="fas fa-bolt" style="color: var(--accent-color);"></i>
+                    <span class="lang-en">Power Calculator</span>
+                    <span class="lang-ar">حاسبة القدرة (واط)</span>
+                </h3>
+                <div class="form-group">
+                    <label>
+                        <span class="lang-en">Voltage (V)</span><span class="lang-ar">الجهد (فولت)</span>
+                    </label>
+                    <input type="number" id="calc-volts" placeholder="220" class="calc-input">
+                </div>
+                <div class="form-group">
+                    <label>
+                        <span class="lang-en">Current (A)</span><span class="lang-ar">التيار (أمبير)</span>
+                    </label>
+                    <input type="number" id="calc-amps" placeholder="5" class="calc-input">
+                </div>
+                <button onclick="calculatePower()" class="btn" style="width: 100%;">
+                    <span class="lang-en">Calculate</span><span class="lang-ar">احسب</span>
+                </button>
+                <div id="result-power" class="calc-result"></div>
+            </div>
+
+            <!-- 2. Solar Panel Estimator -->
+            <div class="calculator-box">
+                <h3 class="heading-md" style="font-size: 1.5rem;">
+                    <i class="fas fa-solar-panel" style="color: var(--accent-color);"></i>
+                    <span class="lang-en">Panel Estimator</span>
+                    <span class="lang-ar">حاسبة الألواح</span>
+                </h3>
+                <div class="form-group">
+                    <label>
+                        <span class="lang-en">Daily Usage (kWh)</span><span class="lang-ar">الاستهلاك اليومي (كيلو
+                            واط)</span>
+                    </label>
+                    <input type="number" id="calc-usage" placeholder="10" class="calc-input">
+                </div>
+                <div class="form-group">
+                    <label>
+                        <span class="lang-en">Panel Wattage (W)</span><span class="lang-ar">قدرة اللوح (واط)</span>
+                    </label>
+                    <input type="number" id="calc-panel-watt" placeholder="550" class="calc-input">
+                </div>
+                <button onclick="calculatePanels()" class="btn" style="width: 100%;">
+                    <span class="lang-en">Calculate</span><span class="lang-ar">احسب</span>
+                </button>
+                <div id="result-panels" class="calc-result"></div>
+            </div>
+
+            <!-- 3. Battery Capacity -->
+            <div class="calculator-box">
+                <h3 class="heading-md" style="font-size: 1.5rem;">
+                    <i class="fas fa-car-battery" style="color: var(--accent-color);"></i>
+                    <span class="lang-en">Battery Capacity</span>
+                    <span class="lang-ar">سعة البطارية</span>
+                </h3>
+                <div class="form-group">
+                    <label>
+                        <span class="lang-en">Total Load (Watts)</span><span class="lang-ar">الحمل الكلي
+                            (واط)</span>
+                    </label>
+                    <input type="number" id="calc-load" placeholder="500" class="calc-input">
+                </div>
+                <div class="form-group">
+                    <label>
+                        <span class="lang-en">Backup Hours</span><span class="lang-ar">ساعات التشغيل</span>
+                    </label>
+                    <input type="number" id="calc-hours" placeholder="4" class="calc-input">
+                </div>
+                <div class="form-group">
+                    <label>
+                        <span class="lang-en">System Voltage (V)</span><span class="lang-ar">فولتية النظام</span>
+                    </label>
+                    <select id="calc-sys-volts" class="calc-input">
+                        <option value="12">12V</option>
+                        <option value="24">24V</option>
+                        <option value="48">48V</option>
+                    </select>
+                </div>
+                <button onclick="calculateBattery()" class="btn" style="width: 100%;">
+                    <span class="lang-en">Calculate</span><span class="lang-ar">احسب</span>
+                </button>
+                <div id="result-battery" class="calc-result"></div>
+            </div>
+
+        </div>
+    </div>
+</section>
+{% endblock %}

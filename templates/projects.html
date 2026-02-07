@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+
+{% block content %}
+<!-- Page Header -->
+<section class="section"
+    style="background-color: var(--primary-color); color: var(--white); text-align: center; padding: 4rem 0;">
+    <div class="container">
+        <h1 class="heading-lg" style="color: var(--white); margin-bottom: 0;">
+            <span class="lang-en">Our Projects</span>
+            <span class="lang-ar">مشاريعنا</span>
+        </h1>
+        <p>
+            <span class="lang-en">Showcasing our best reliable solar installations across Nineveh.</span>
+            <span class="lang-ar">عرض لأفضل مشاريعنا وأنظمتنا في نينوى.</span>
+        </p>
+    </div>
+</section>
+
+<!-- Gallery Grid -->
+<section class="section">
+    <div class="container">
+        <div class="project-gallery-grid">
+            <!-- Project 1 -->
+            <div class="project-item">
+                <img src="{{ url_for('static', filename='project_1.jpg') }}" alt="Rooftop Solar Installation">
+                <div class="project-overlay">
+                    <h3>
+                        <span class="lang-en">Residential Rooftop</span>
+                        <span class="lang-ar">تركيب منزلي على السطح</span>
+                    </h3>
+                    <p>
+                        <span class="lang-en">Efficient Solar Panels</span>
+                        <span class="lang-ar">ألواح شمسية عالية الكفاءة</span>
+                    </p>
+                </div>
+            </div>
+            <!-- Project 2 -->
+            <div class="project-item">
+                <img src="{{ url_for('static', filename='project_2.jpg') }}" alt="Industrial Solar Project">
+                <div class="project-overlay">
+                    <h3>
+                        <span class="lang-en">Industrial Facility</span>
+                        <span class="lang-ar">منشأة صناعية</span>
+                    </h3>
+                    <p>
+                        <span class="lang-en">Large Scale Installation</span>
+                        <span class="lang-ar">تركيب واسع النطاق</span>
+                    </p>
+                </div>
+            </div>
+            <!-- Project 3 -->
+            <div class="project-item">
+                <img src="{{ url_for('static', filename='project_3.jpg') }}" alt="Commercial Solar System">
+                <div class="project-overlay">
+                    <h3>
+                        <span class="lang-en">Commercial Building</span>
+                        <span class="lang-ar">مبنى تجاري</span>
+                    </h3>
+                    <p>
+                        <span class="lang-en">Sustainable Energy Solution</span>
+                        <span class="lang-ar">حلول الطاقة المستدامة</span>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

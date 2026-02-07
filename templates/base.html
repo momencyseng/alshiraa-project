@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Al-Shiraa Solar Energy | Clean Energy for a Better Future</title>
+    <meta name="description"
+        content="Al-Shiraa Solar Energy provides top-tier solar systems and security solutions in Nineveh, Iraq. Over 15 years of experience.">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;700&family=Tajawal:wght@300;400;700&display=swap"
+        rel="stylesheet">
+    <!-- Font Awesome (for icons) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+    <!-- Header -->
+    <header>
+        <div class="container navbar">
+            <a href="{{ url_for('index') }}" class="logo">
+                <img src="{{ url_for('static', filename='logo.png') }}" alt="Al-Shiraa Logo">
+                <span class="lang-en">Al-Shiraa Solar</span>
+                <span class="lang-ar">الشراع للطاقة</span>
+            </a>
+            <div class="hamburger">
+                <i class="fas fa-bars"></i>
+            </div>
+            <ul class="nav-links">
+                <li><a href="{{ url_for('index') }}"><span class="lang-en">Home</span><span
+                            class="lang-ar">الرئيسية</span></a></li>
+                <li><a href="{{ url_for('index') }}#about"><span class="lang-en">About Us</span><span class="lang-ar">من
+                            نحن</span></a></li>
+                <li><a href="{{ url_for('index') }}#services"><span class="lang-en">Services</span><span
+                            class="lang-ar">الخدمات</span></a>
+                </li>
+                <li><a href="{{ url_for('calculators') }}"><span class="lang-en">Calculators</span><span
+                            class="lang-ar">الحاسبات</span></a></li>
+                <li><a href="{{ url_for('products') }}"><span class="lang-en">Products</span><span
+                            class="lang-ar">المنتجات</span></a>
+                </li>
+                <li><a href="{{ url_for('offers') }}" style="color: red;"><span class="lang-en">Special
+                            Offers</span><span class="lang-ar">عروض خاصة</span></a></li>
+                <li><a href="{{ url_for('projects') }}"><span class="lang-en">Gallery</span><span
+                            class="lang-ar">المعرض</span></a>
+                </li>
+                <li><a href="{{ url_for('blog') }}"><span class="lang-en">Blog</span><span
+                            class="lang-ar">المدونة</span></a></li>
+                <li><a href="{{ url_for('maintenance') }}"><span class="lang-en">Services</span><span
+                            class="lang-ar">الخدمات</span></a>
+                </li>
+
+                <li class="nav-buttons">
+                    <a href="{{ url_for('cart') }}" class="btn secondary-btn"
+                        style="padding: 0.5rem; margin-right: 5px;" title="Cart">
+                        <i class="fas fa-shopping-cart"></i>
+                        {% if session.get('cart') %}
+                        <span class="badge"
+                            style="background: red; color: white; border-radius: 50%; padding: 2px 5px; font-size: 0.7rem; vertical-align: top;">{{
+                            session.cart|length }}</span>
+                        {% endif %}
+                    </a>
+
+                    {% if current_user.is_authenticated %}
+                    {% if current_user.role in ['admin', 'staff'] %}
+                    <a href="{{ url_for('dashboard') }}" class="btn" style="padding: 0.5rem 1rem;">Dashboard</a>
+                    {% endif %}
+                    <a href="{{ url_for('logout') }}"><i class="fas fa-sign-out-alt"></i></a>
+                    {% else %}
+                    <a href="{{ url_for('login') }}" class="btn secondary-btn" style="padding: 0.5rem 1rem;"><span
+                            class="lang-en">Login</span><span class="lang-ar">دخول</span></a>
+                    {% endif %}
+
+                    <button id="lang-toggle" class="language-btn">العربية</button>
+                    <button id="theme-toggle" class="theme-toggle-btn" title="Toggle Dark Mode">
+                        <i class="fas fa-moon"></i>
+                    </button>
+                </li>
+            </ul>
+        </div>
+    </header>
+
+    <!-- Flash Messages -->
+    <div class="container" style="margin-top: 20px;">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+        {% for category, message in messages %}
+        <div class="alert alert-{{ category }}" style="padding: 15px; border-radius: 5px; margin-bottom: 20px; 
+                   {% if category == 'success' %}background-color: #d4edda; color: #155724;{% endif %}
+                   {% if category == 'danger' %}background-color: #f8d7da; color: #721c24;{% endif %}
+                   {% if category == 'info' %}background-color: #d1ecf1; color: #0c5460;{% endif %}">
+            {{ message }}
+        </div>
+        {% endfor %}
+        {% endif %}
+        {% endwith %}
+    </div>
+
+    {% block content %}{% endblock %}
+
+    <!-- Footer & Contact -->
+    <footer id="contact">
+        <div class="container footer-content">
+            <div class="footer-column">
+                <h4>
+                    <span class="lang-en">Al-Shiraa Solar Energy</span>
+                    <span class="lang-ar">معرض الشراع للطاقة</span>
+                </h4>
+                <p>
+                    <span class="lang-en">Leading the way in renewable energy solutions in Nineveh.</span>
+                    <span class="lang-ar">رواد حلول الطاقة المتجددة في نينوى.</span>
+                </p>
+            </div>
+            <div class="footer-column">
+                <h4>
+                    <span class="lang-en">Quick Links</span>
+                    <span class="lang-ar">روابط سريعة</span>
+                </h4>
+                <ul>
+                    <li><a href="{{ url_for('index') }}#about"><span class="lang-en">About Us</span><span
+                                class="lang-ar">عن الشركة</span></a>
+                    </li>
+                    <li><a href="{{ url_for('index') }}#services"><span class="lang-en">Services</span><span
+                                class="lang-ar">الخدمات</span></a></li>
+                    <li><a href="{{ url_for('projects') }}"><span class="lang-en">Gallery</span><span
+                                class="lang-ar">المعرض</span></a></li>
+                    <li><a href="{{ url_for('blog') }}"><span class="lang-en">Blog</span><span
+                                class="lang-ar">المدونة</span></a>
+                    </li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h4>
+                    <span class="lang-en">Contact Us</span>
+                    <span class="lang-ar">اتصل بنا</span>
+                </h4>
+                <ul>
+                    <li>
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span class="lang-en">Mosul, Opposite Al-Andalus District</span>
+                        <span class="lang-ar">الموصل، حي الأندلس، مقابل الحي</span>
+                    </li>
+                    <li>
+                        <i class="fas fa-phone"></i>
+                        <span dir="ltr">+964 771 841 1166</span>
+                    </li>
+                </ul>
+                <div class="social-links" style="margin-top: 15px;">
+                    <a href="https://www.facebook.com/share/1H4NjtAdfA/?mibextid=wwXIfr" target="_blank"
+                        style="color: white; margin-right: 15px; font-size: 1.5rem;">
+                        <i class="fab fa-facebook"></i>
+                    </a>
+                    <a href="https://instagram.com/alsheraa.iq" target="_blank"
+                        style="color: white; font-size: 1.5rem;">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="footer-column">
+                <h4>
+                    <span class="lang-en">Location</span>
+                    <span class="lang-ar">الموقع</span>
+                </h4>
+                <!-- Google Maps Embed Placeholder -->
+                <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3211.7!2d43.1!3d36.3!2m3!1f0!2f0!3f0!3m2!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMzbCsDIwJzUyLjYiTiA0M8KwMDknMjEuNiJF!5e0!3m2!1sen!2siq!4v1645000000000!5m2!1sen!2siq"
+                    width="100%" height="200" style="border:0; border-radius: 8px;" allowfullscreen=""
+                    loading="lazy"></iframe>
+                <div style="margin-top: 10px;">
+                    <a href="https://maps.app.goo.gl/waubHG9Vxot2tj859" target="_blank"
+                        style="color: var(--accent-color); font-weight: bold;">
+                        <i class="fas fa-map-marked-alt"></i>
+                        <span class="lang-en">View on Google Maps</span>
+                        <span class="lang-ar">عرض على خرائط جوجل</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="container">
+                &copy; 2026
+                <span class="lang-en">Al-Shiraa Solar Energy. All Rights Reserved.</span>
+                <span class="lang-ar">معرض الشراع للطاقة الشمسية. جميع الحقوق محفوظة.</span>
+            </div>
+        </div>
+    </footer>
+
+    <!-- WhatsApp Button -->
+    <a href="https://wa.me/9647718411166" class="whatsapp-float" target="_blank">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+
+</html>
