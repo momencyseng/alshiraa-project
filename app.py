@@ -410,6 +410,22 @@ def create_admin():
     else:
         print("Admin user already exists.")
 
+@app.cli.command("reset_db")
+def reset_db():
+    """Drops all tables and recreates them."""
+    if input("Are you sure you want to drop all tables? (y/n): ").lower() == 'y':
+        db.drop_all()
+        db.create_all()
+        
+        # Create admin
+        hashed_pw = generate_password_hash('admin123', method='pbkdf2:sha256')
+        admin = User(username='admin', password_hash=hashed_pw, role='admin')
+        db.session.add(admin)
+        db.session.commit()
+        print("Database reset successfully. Admin user created (admin/admin123).")
+    else:
+        print("Operation cancelled.")
+
 if __name__ == '__main__':
     with app.app_context():
         db.create_all()
