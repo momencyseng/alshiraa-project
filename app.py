@@ -11,7 +11,9 @@ from datetime import datetime, timedelta
 from models import db, User, Product, BlogPost, Project, Order, OrderItem, MaintenanceBooking
 from forms import LoginForm, ProductForm # You'll need to update forms.py too
 
-app = Flask(__name__)
+app = Flask(__name__, 
+            static_folder='static', 
+            template_folder='templates')
 
 # Config
 app.config['SECRET_KEY'] = 'dev-secret-key-change-this-in-production'
