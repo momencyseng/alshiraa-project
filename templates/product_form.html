@@ -44,6 +44,25 @@
                     {% endif %}
                 </div>
 
+                <div class="form-group" style="display: flex; gap: 1rem; margin-bottom: 1.5rem;">
+                    <div style="flex: 1;">
+                        {{ form.price.label(class="form-control-label") }}
+                        {{ form.price(class="calc-input") }}
+                    </div>
+                    <div style="flex: 1;">
+                        {{ form.stock.label(class="form-control-label") }}
+                        {{ form.stock(class="calc-input") }}
+                    </div>
+                </div>
+
+                <div class="form-group" style="margin-bottom: 1.5rem;">
+                    <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;">
+                        {{ form.is_special_offer(style="width: 20px; height: 20px;") }}
+                        <span class="form-control-label" style="margin: 0;">{{ form.is_special_offer.label.text
+                            }}</span>
+                    </label>
+                </div>
+
                 <div class="form-group" style="margin-bottom: 1.5rem;">
                     {{ form.image.label(class="form-control-label") }}
                     {{ form.image(class="calc-input", style="padding: 0.5rem;") }}

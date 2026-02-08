@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="section" style="min-height: 80vh;">
+    <div class="container">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
+            <h1 class="heading-lg">
+                <span class="lang-en">Manage Staff</span>
+                <span class="lang-ar">إدارة الموظفين</span>
+            </h1>
+            <a href="{{ url_for('add_staff') }}" class="btn">
+                <i class="fas fa-plus"></i> <span class="lang-en">Add Staff</span><span class="lang-ar">إضافة
+                    موظف</span>
+            </a>
+        </div>
+
+        <div style="background: white; padding: 2rem; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+            <table style="width: 100%; border-collapse: collapse;">
+                <thead>
+                    <tr style="border-bottom: 2px solid #eee;">
+                        <th style="text-align: left; padding: 1rem;">Username</th>
+                        <th style="text-align: left; padding: 1rem;">Role</th>
+                        <th style="text-align: left; padding: 1rem;">Reset Password</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for member in staff %}
+                    <tr style="border-bottom: 1px solid #eee;">
+                        <td style="padding: 1rem;">{{ member.username }}</td>
+                        <td style="padding: 1rem;">
+                            <span
+                                style="padding: 5px 10px; border-radius: 4px; background: {% if member.role == 'admin' %}#d4edda{% else %}#cce5ff{% endif %}; color: {% if member.role == 'admin' %}#155724{% else %}#004085{% endif %};">
+                                {{ member.role }}
+                            </span>
+                        </td>
+                        <td style="padding: 1rem;">
+                            <form method="POST" action="{{ url_for('reset_staff_password', user_id=member.id) }}"
+                                style="display: flex; gap: 10px;">
+                                <input type="password" name="new_password" placeholder="New Password" class="calc-input"
+                                    style="padding: 5px; margin: 0; width: 150px;" required minlength="6">
+                                <button type="submit" class="btn secondary-btn"
+                                    style="padding: 5px 10px; font-size: 0.8rem;">Reset</button>
+                            </form>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <div style="margin-top: 2rem;">
+            <a href="{{ url_for('dashboard') }}" class="btn secondary-btn">
+                <i class="fas fa-arrow-left"></i> <span class="lang-en">Back to Dashboard</span><span
+                    class="lang-ar">عودة للوحة التحكم</span>
+            </a>
+        </div>
+    </div>
+</section>
+{% endblock %}

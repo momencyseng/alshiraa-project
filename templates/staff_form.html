@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="section" style="min-height: 80vh;">
+    <div class="container">
+        <h1 class="heading-md text-center">
+            <span class="lang-en">Add New Staff Member</span>
+            <span class="lang-ar">إضافة موظف جديد</span>
+        </h1>
+
+        <div
+            style="max-width: 500px; margin: 0 auto; background: white; padding: 2rem; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+            <form method="POST" action="">
+                {{ form.hidden_tag() }}
+
+                <div class="form-group" style="margin-bottom: 1.5rem;">
+                    {{ form.username.label(class="form-control-label") }}
+                    {% if form.username.errors %}
+                    {{ form.username(class="calc-input is-invalid") }}
+                    <div class="invalid-feedback" style="color: red; font-size: 0.9rem;">
+                        {% for error in form.username.errors %}
+                        <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                    {% else %}
+                    {{ form.username(class="calc-input") }}
+                    {% endif %}
+                </div>
+
+                <div class="form-group" style="margin-bottom: 1.5rem;">
+                    {{ form.password.label(class="form-control-label") }}
+                    {% if form.password.errors %}
+                    {{ form.password(class="calc-input is-invalid") }}
+                    <div class="invalid-feedback" style="color: red; font-size: 0.9rem;">
+                        {% for error in form.password.errors %}
+                        <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                    {% else %}
+                    {{ form.password(class="calc-input") }}
+                    {% endif %}
+                </div>
+
+                <div class="form-group" style="margin-bottom: 2rem;">
+                    {{ form.role.label(class="form-control-label") }}
+                    {{ form.role(class="calc-input") }}
+                </div>
+
+                <div class="form-group">
+                    {{ form.submit(class="btn", style="width: 100%;") }}
+                </div>
+            </form>
+
+            <div style="margin-top: 1rem; text-align: center;">
+                <a href="{{ url_for('manage_staff') }}" style="color: #666;">Cancel</a>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

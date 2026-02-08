@@ -261,6 +261,7 @@ def maintenance():
     return render_template('maintenance_booking.html')
 
 # --- Login Route ---
+@app.route('/login', methods=['GET', 'POST'])
 def login():
     if current_user.is_authenticated:
         return redirect(url_for('dashboard'))
@@ -398,6 +399,78 @@ def delete_product(product_id):
     db.session.commit()
     flash('تم حذف المنتج', 'success')
     return redirect(url_for('dashboard'))
+
+# --- Staff Management (Admin Only) ---
+from forms import StaffForm, BlogPostForm
+
+@app.route('/dashboard/staff')
+@admin_required
+def manage_staff():
+    staff_members = User.query.filter(User.role.in_(['staff', 'admin'])).all()
+    return render_template('manage_staff.html', staff=staff_members)
+
+@app.route('/dashboard/staff/add', methods=['GET', 'POST'])
+@admin_required
+def add_staff():
+    form = StaffForm()
+    if form.validate_on_submit():
+        if User.query.filter_by(username=form.username.data).first():
+            flash('اسم المستخدم موجود مسبقاً', 'danger')
+        else:
+            hashed_pw = generate_password_hash(form.password.data, method='pbkdf2:sha256')
+            user = User(username=form.username.data, password_hash=hashed_pw, role=form.role.data)
+            db.session.add(user)
+            db.session.commit()
+            flash('تم إضافة الموظف بنجاح', 'success')
+            return redirect(url_for('manage_staff'))
+    return render_template('staff_form.html', form=form, title='إضافة موظف')
+
+@app.route('/dashboard/staff/reset_password/<int:user_id>', methods=['POST'])
+@admin_required
+def reset_staff_password(user_id):
+    user = User.query.get_or_404(user_id)
+    new_pass = request.form.get('new_password')
+    if new_pass and len(new_pass) >= 6:
+        user.password_hash = generate_password_hash(new_pass, method='pbkdf2:sha256')
+        db.session.commit()
+        flash(f'تم تغيير كلمة مرور {user.username}', 'success')
+    else:
+        flash('كلمة المرور يجب أن تكون 6 أحرف على الأقل', 'danger')
+    return redirect(url_for('manage_staff'))
+
+# --- Blog Management ---
+
+@app.route('/dashboard/blog')
+@staff_required
+def manage_blog():
+    posts = BlogPost.query.order_by(BlogPost.created_at.desc()).all()
+    return render_template('manage_blog.html', posts=posts)
+
+@app.route('/dashboard/blog/add', methods=['GET', 'POST'])
+@staff_required
+def add_blog_post():
+    form = BlogPostForm()
+    if form.validate_on_submit():
+        # Handle image upload if implemented, for now simple
+        post = BlogPost(
+            title=form.title.data,
+            content=form.content.data,
+            author_id=current_user.id
+        )
+        db.session.add(post)
+        db.session.commit()
+        flash('تم نشر المقال', 'success')
+        return redirect(url_for('manage_blog'))
+    return render_template('blog_form.html', form=form, title='إضافة مقال')
+
+@app.route('/dashboard/blog/delete/<int:post_id>')
+@staff_required
+def delete_blog_post(post_id):
+    post = BlogPost.query.get_or_404(post_id)
+    db.session.delete(post)
+    db.session.commit()
+    flash('تم حذف المقال', 'success')
+    return redirect(url_for('manage_blog'))
 
 # Application Context Commands
 @app.cli.command("create_admin")

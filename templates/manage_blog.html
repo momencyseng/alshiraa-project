@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="section" style="min-height: 80vh;">
+    <div class="container">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
+            <h1 class="heading-lg">
+                <span class="lang-en">Manage Blog</span>
+                <span class="lang-ar">إدارة المدونة</span>
+            </h1>
+            <a href="{{ url_for('add_blog_post') }}" class="btn">
+                <i class="fas fa-plus"></i> <span class="lang-en">New Post</span><span class="lang-ar">مقال جديد</span>
+            </a>
+        </div>
+
+        <div style="background: white; padding: 2rem; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+            {% if posts %}
+            <table style="width: 100%; border-collapse: collapse;">
+                <thead>
+                    <tr style="border-bottom: 2px solid #eee;">
+                        <th style="text-align: left; padding: 1rem;">Title</th>
+                        <th style="text-align: left; padding: 1rem;">Date</th>
+                        <th style="text-align: left; padding: 1rem;">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for post in posts %}
+                    <tr style="border-bottom: 1px solid #eee;">
+                        <td style="padding: 1rem;">{{ post.title }}</td>
+                        <td style="padding: 1rem;">{{ post.created_at.strftime('%Y-%m-%d') }}</td>
+                        <td style="padding: 1rem;">
+                            <!-- Edit logic could be added similarly -->
+                            <a href="{{ url_for('delete_blog_post', post_id=post.id) }}"
+                                style="color: red; margin-left: 10px;" onclick="return confirm('Are you sure?')">
+                                <i class="fas fa-trash"></i> Delete
+                            </a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            {% else %}
+            <p class="text-center" style="color: #888;">No blog posts yet.</p>
+            {% endif %}
+        </div>
+
+        <div style="margin-top: 2rem;">
+            <a href="{{ url_for('dashboard') }}" class="btn secondary-btn">
+                <i class="fas fa-arrow-left"></i> <span class="lang-en">Back to Dashboard</span><span
+                    class="lang-ar">عودة للوحة التحكم</span>
+            </a>
+        </div>
+    </div>
+</section>
+{% endblock %}

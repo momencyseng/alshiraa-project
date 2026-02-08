@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="section" style="min-height: 80vh;">
+    <div class="container">
+        <h1 class="heading-md text-center">
+            <span class="lang-en">Add New Blog Post</span>
+            <span class="lang-ar">إضافة مقال جديد</span>
+        </h1>
+
+        <div
+            style="max-width: 800px; margin: 0 auto; background: white; padding: 2rem; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+            <form method="POST" action="">
+                {{ form.hidden_tag() }}
+
+                <div class="form-group" style="margin-bottom: 1.5rem;">
+                    {{ form.title.label(class="form-control-label") }}
+                    {% if form.title.errors %}
+                    {{ form.title(class="calc-input is-invalid") }}
+                    <div class="invalid-feedback" style="color: red; font-size: 0.9rem;">
+                        {% for error in form.title.errors %}
+                        <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                    {% else %}
+                    {{ form.title(class="calc-input") }}
+                    {% endif %}
+                </div>
+
+                <div class="form-group" style="margin-bottom: 1.5rem;">
+                    {{ form.content.label(class="form-control-label") }}
+                    {% if form.content.errors %}
+                    {{ form.content(class="calc-input is-invalid", style="min-height: 200px;") }}
+                    <div class="invalid-feedback" style="color: red; font-size: 0.9rem;">
+                        {% for error in form.content.errors %}
+                        <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                    {% else %}
+                    {{ form.content(class="calc-input", style="min-height: 200px;") }}
+                    {% endif %}
+                </div>
+
+                <!-- Image field could be fully implemented later -->
+                <!-- 
+                <div class="form-group" style="margin-bottom: 2rem;">
+                    {{ form.image.label(class="form-control-label") }}
+                    {{ form.image(class="calc-input") }}
+                </div>
+                -->
+
+                <div class="form-group">
+                    {{ form.submit(class="btn", style="width: 100%;") }}
+                </div>
+            </form>
+
+            <div style="margin-top: 1rem; text-align: center;">
+                <a href="{{ url_for('manage_blog') }}" style="color: #666;">Cancel</a>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

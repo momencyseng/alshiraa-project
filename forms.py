@@ -21,3 +21,15 @@ class ProductForm(FlaskForm):
     is_special_offer = BooleanField('عرض خاص؟')
     image = FileField('صورة المنتج')
     submit = SubmitField('إضافة / حفظ')
+
+class StaffForm(FlaskForm):
+    username = StringField('اسم المستخدم', validators=[DataRequired(), Length(min=2, max=150)])
+    password = PasswordField('كلمة المرور', validators=[DataRequired(), Length(min=6)])
+    role = SelectField('الصلاحية', choices=[('staff', 'موظف'), ('admin', 'مدير')], default='staff')
+    submit = SubmitField('إضافة موظف')
+
+class BlogPostForm(FlaskForm):
+    title = StringField('عنوان المقال', validators=[DataRequired()])
+    content = TextAreaField('محتوى المقال', validators=[DataRequired()])
+    image = FileField('صورة المقال')
+    submit = SubmitField('نشر المقال')

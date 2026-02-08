@@ -9,11 +9,24 @@
                 <span class="lang-en">Dashboard</span>
                 <span class="lang-ar">لوحة التحكم</span>
             </h1>
-            <a href="{{ url_for('add_product') }}" class="btn">
-                <i class="fas fa-plus"></i>
-                <span class="lang-en">Add Product</span>
-                <span class="lang-ar">إضافة منتج</span>
-            </a>
+            <div style="display: flex; gap: 10px;">
+                {% if current_user.role == 'admin' %}
+                <a href="{{ url_for('manage_staff') }}" class="btn secondary-btn"
+                    style="border-color: var(--primary-color); color: var(--primary-color);">
+                    <i class="fas fa-users-cog"></i> <span class="lang-en">Staff</span><span
+                        class="lang-ar">الموظفين</span>
+                </a>
+                {% endif %}
+                <a href="{{ url_for('manage_blog') }}" class="btn secondary-btn"
+                    style="border-color: var(--primary-color); color: var(--primary-color);">
+                    <i class="fas fa-blog"></i> <span class="lang-en">Blog</span><span class="lang-ar">المدونة</span>
+                </a>
+                <a href="{{ url_for('add_product') }}" class="btn">
+                    <i class="fas fa-plus"></i>
+                    <span class="lang-en">Add Product</span>
+                    <span class="lang-ar">إضافة منتج</span>
+                </a>
+            </div>
         </div>
 
         <div style="background: var(--light-bg); padding: 1.5rem; border-radius: 8px;">
