@@ -21,6 +21,16 @@
                     style="border-color: var(--primary-color); color: var(--primary-color);">
                     <i class="fas fa-blog"></i> <span class="lang-en">Blog</span><span class="lang-ar">المدونة</span>
                 </a>
+                <a href="{{ url_for('manage_orders') }}" class="btn secondary-btn"
+                    style="border-color: var(--primary-color); color: var(--primary-color);">
+                    <i class="fas fa-shopping-bag"></i> <span class="lang-en">Orders</span><span
+                        class="lang-ar">الطلبات</span>
+                </a>
+                <a href="{{ url_for('manage_maintenance') }}" class="btn secondary-btn"
+                    style="border-color: var(--primary-color); color: var(--primary-color);">
+                    <i class="fas fa-tools"></i> <span class="lang-en">Maintenance</span><span
+                        class="lang-ar">الصيانة</span>
+                </a>
                 <a href="{{ url_for('add_product') }}" class="btn">
                     <i class="fas fa-plus"></i>
                     <span class="lang-en">Add Product</span>

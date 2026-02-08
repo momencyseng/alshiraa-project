@@ -12,6 +12,7 @@ from models import db, User, Product, BlogPost, Project, Order, OrderItem, Maint
 from forms import LoginForm, ProductForm # You'll need to update forms.py too
 
 app = Flask(__name__, 
+            static_url_path='/static', 
             static_folder='static', 
             template_folder='templates')
 
@@ -500,6 +501,40 @@ def reset_db():
         print("Database reset successfully. Admin user created (admin/admin123).")
     else:
         print("Operation cancelled.")
+
+# --- Order & Maintenance Management (Admin/Staff) ---
+
+@app.route('/dashboard/orders')
+@staff_required
+def manage_orders():
+    orders = Order.query.order_by(Order.created_at.desc()).all()
+    return render_template('manage_orders.html', orders=orders)
+
+@app.route('/dashboard/orders/update/<int:order_id>', methods=['POST'])
+@staff_required
+def update_order_status(order_id):
+    order = Order.query.get_or_404(order_id)
+    new_status = request.form.get('status')
+    if new_status:
+        order.status = new_status
+        db.session.commit()
+        flash(f'تم تحديث حالة الطلب #{order.id}', 'success')
+    return redirect(url_for('manage_orders'))
+
+@app.route('/dashboard/maintenance')
+@staff_required
+def manage_maintenance():
+    bookings = MaintenanceBooking.query.order_by(MaintenanceBooking.created_at.desc()).all()
+    return render_template('manage_maintenance.html', bookings=bookings)
+
+@app.route('/dashboard/maintenance/delete/<int:booking_id>')
+@staff_required
+def delete_maintenance_booking(booking_id):
+    booking = MaintenanceBooking.query.get_or_404(booking_id)
+    db.session.delete(booking)
+    db.session.commit()
+    flash('تم حذف حجز الصيانة', 'success')
+    return redirect(url_for('manage_maintenance'))
 
 if __name__ == '__main__':
     with app.app_context():
